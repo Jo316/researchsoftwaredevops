@@ -9,6 +9,7 @@ time across all sites.
 
 import pandas as pd
 
+
 def read_variable_from_csv(filename):
     """Reads a named variable from a CSV file, and returns a
     pandas dataframe containing that variable. The CSV file must contain
@@ -21,7 +22,7 @@ def read_variable_from_csv(filename):
     """
     dataset = pd.read_csv(filename, usecols=['Date', 'Site', 'Rainfall (mm)'])
 
-    dataset = dataset.rename({'Date':'OldDate'}, axis='columns')
+    dataset = dataset.rename({'Date' : 'OldDate'}, axis='columns')
     dataset['Date'] = [pd.to_datetime(x,dayfirst=True) for x in dataset['OldDate']]
     dataset = dataset.drop('OldDate', axis='columns')
 
@@ -33,6 +34,7 @@ def read_variable_from_csv(filename):
     newdataset = newdataset.sort_index()
 
     return newdataset
+
 
 def daily_total(data):
     """Calculate the daily total of a 2d data array.

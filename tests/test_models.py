@@ -5,6 +5,7 @@ import pandas.testing as pdt
 import datetime
 import pytest
 
+
 def test_daily_mean_zeros():
     """Test that mean function works for an array of zeros."""
     from catchment.models import daily_mean
@@ -119,6 +120,7 @@ def test_daily_totla_integers():
     # Need to use Pandas testing functions to compare arrays
     pdt.assert_frame_equal(daily_total(test_input), test_result)
 
+
 def test_daily_min():
     """Test that min function works for an array of positive and negative integers."""
     from catchment.models import daily_min
@@ -139,6 +141,7 @@ def test_daily_min():
     )
 
     pdt.assert_frame_equal(daily_min(test_input), test_result)
+
 
 def test_daily_max():
     """Test that max function works for an array of positive integers."""
@@ -162,10 +165,9 @@ def test_daily_max():
     pdt.assert_frame_equal(daily_max(test_input), test_result)
 
 
-#import pytest
 def test_daily_min_python_list():
-   # """Test for AttributeError when passing a python list"""
+    """Test for AttributeError when passing a python list"""
     from catchment.models import daily_min
 
     with pytest.raises(AttributeError):
-        error_expected = daily_min([[3, 4, 7],[-3, 0, 5]])
+        error_expected = daily_min([[3, 4, 7] , [-3, 0, 5]])
