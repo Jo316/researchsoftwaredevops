@@ -22,7 +22,7 @@ jobs:
       - name: Set up Conda environment and install dependencies
         run: |
           conda env create -f environment.yml
-          conda activate myenv
+         
 
       # Test with PyTest
       - name: Test with PyTest
