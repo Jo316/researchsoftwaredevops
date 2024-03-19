@@ -1,34 +1,36 @@
 name: CI
 
 # We can specify which Github events will trigger a CI build
-on: push
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
 
-# now define a single job 'build' (but could define more)
+# Define a single job 'build'
 jobs:
-
   build:
-
-    # we can also specify the OS to run tests on
+    # Specify the OS to run tests on
     runs-on: ubuntu-latest
 
-    # a job is a seq of steps
+    # Define a sequence of steps
     steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Updated to use Node.js 20
 
-    # Next we need to checkout out repository, and set up Python
-    # A 'name' is just an optional label shown in the log - helpful to clarify progress - and can be anything
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      # Set up Python 3.11
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11"
 
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.11"
+      # Install Python dependencies
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
 
-    - name: Install Python dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install -r requirements.txt
-
-    - name: Test with PyTest
-      run: |
-        python3 -m pytest --cov=catchment.models tests/test_models.py
+      # Test with PyTest
+      - name: Test with PyTest
+        run: |
+          python -m pytest --cov=catchment.models tests/test_models.py
