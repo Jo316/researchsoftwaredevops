@@ -2,22 +2,14 @@ name: CI
 
 # We can specify which Github events will trigger a CI build
 on: push
-# 
+
 # now define a single job 'build' (but could define more)
 jobs:
 
   build:
-    strategy:
-      matrix:
-        os: ['ubuntu-latest', 'macos-latest','windows-latest']
-<<<<<<< HEAD
-        python-version: ["3.9"]
-=======
-        python-version: ["3.11"]
->>>>>>> develop
 
     # we can also specify the OS to run tests on
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     # a job is a seq of steps
     steps:
@@ -27,14 +19,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-<<<<<<< HEAD
-    - name: Set up Python 
-=======
-    - name: Set up Python
->>>>>>> develop
+    - name: Set up Python 3.11
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: "3.11"
 
     - name: Install Python dependencies
       run: |
